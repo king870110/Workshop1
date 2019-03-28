@@ -20,3 +20,9 @@ function loadBookData() {
 $(function () {
     loadBookData();
 });
+
+$(document).ready(function () {
+    $("#book_category").change(function () {
+        $(".book-image").attr("src", "image/" + $('#book_category').val()+".jpg");
+    });
+});
