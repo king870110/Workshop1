@@ -129,13 +129,17 @@ function moneyFormat() {
 
 }
 //money total
-$(document).ready(function () {
-    $("#book_amount").keyup(function () {
-        $('#book_total').html($("#book_amount").val() * $("#book_price").val());
-    });
-    $("#book_price").keyup(function () {
-        $('#book_total').html($("#book_amount").val() * $("#book_price").val());
-    });
+$("#book_amount").change(function () {
+    $('#book_total').html($("#book_amount").val() * $("#book_price").val());
+});
+$("#book_price").change(function () {
+    $('#book_total').html($("#book_amount").val() * $("#book_price").val());
+});
+$("#book_amount").keyup(function () {
+    $('#book_total').html($("#book_amount").val() * $("#book_price").val());
+});
+$("#book_price").keyup(function () {
+    $('#book_total').html($("#book_amount").val() * $("#book_price").val());
 });
 
 
@@ -153,7 +157,7 @@ function reset() {
     $("#grid").data("kendoGrid").dataSource.read();
 }
 
-$(document).ready(function () {
+$(document).ready(function gridtable(options) {
 
     if (localStorage["grid_data"] == undefined) {
         setTestData();
@@ -170,8 +174,10 @@ $(document).ready(function () {
                 options.success(options.data);
             },
             read: function (options) {
+                console.log(localStorage["grid_data"])
                 var localData = JSON.parse(localStorage["grid_data"]);
                 options.success(localData);
+
             },
             update: function (options) {
                 var localData = JSON.parse(localStorage["grid_data"]);
@@ -207,6 +213,7 @@ $(document).ready(function () {
                     // the user changed the name field
                     if (options.values.name !== options.model.name) {
                         console.log("name is modified");
+                        options.success(options.data);
                     }
                 } else {
                     options.preventDefault();
@@ -240,15 +247,15 @@ $(document).ready(function () {
         toolbar: ["create", "save", "cancel"],
         columns: [
             { command: "destroy", width: "130px" },
-            { field: "BookId", width: "100px" },
-            { field: "BookName", width: "100px" },
-            { field: "BookCategory", width: "100px" },
-            { field: "BookAuthor", width: "100px" },
-            { field: "BookBoughtDate", width: "100px" },
-            { field: "BookDeliveredDate", width: "100px" },
-            { field: "BookPrice", width: "100px" },
-            { field: "BookAmount", width: "100px" },
-            { field: "BookTotal", width: "100px" }
+            { field: "BookId", width: "100px", title: "書籍" + "<br>" + "編號" },
+            { field: "BookName", width: "100px", title: "書籍" + "<br>" + "名稱" },
+            { field: "BookCategory", width: "100px", title: "書籍" + "<br>" + "種類" },
+            { field: "BookAuthor", width: "100px", title: "作者" },
+            { field: "BookBoughtDate", width: "100px", title: "購買" + "<br>" + "日期" },
+            { field: "BookDeliveredDate", width: "100px", title: "送達" + "<br>" + "狀態" },
+            { field: "BookPrice", width: "100px", title: "金額" },
+            { field: "BookAmount", width: "100px", title: "數量" },
+            { field: "BookTotal", width: "100px", title: "總計" }
 
         ],
         editable: "incell",
@@ -257,8 +264,28 @@ $(document).ready(function () {
 
 //add book
 function addbook() {
-    var testData2 = localStorage["grid_data"];
-    //console.log(testData2);
-    localStorage["grid_data"].concat([{ "BookId": 1, "BookName": "TEST1", "BookCategory": 1, "BookAuthor": 1, "BookBoughtDate": 1, "BookDeliveredDate": 1, "BookPrice": 1, "BookAmount": 1, "BookTotal": 1 }]);
-    console.log(localStorage["grid_data"]);
-};
+    new_BookName = $('#book_name').val();
+    new_BookCategory = $('#book_category').val();
+    new_BookAuthor = $('#book_author').val();
+    new_BookBoughtDate = $('#bought_datepicker').val();
+    new_BookDeliveredDate = $('#delivered_datepicker').val();
+    new_BookPrice = $('#book_price').val();
+    new_BookAmount = $('#book_amount').val();
+    new_BookTotal = $("#book_amount").val() * $("#book_price").val()
+
+    var localData = JSON.parse(localStorage["grid_data"]);
+    new_BookId = localData.length + 1;
+    console.log(new_BookId);
+    var testData3 = [
+        { BookId: new_BookId, BookName: new_BookName, BookCategory: new_BookCategory, BookAuthor: new_BookAuthor, BookBoughtDate: new_BookBoughtDate, BookDeliveredDate: new_BookDeliveredDate, BookPrice: new_BookPrice, BookAmount: new_BookAmount, BookTotal: new_BookTotal }
+    ];
+
+
+    localData = localData.concat(testData3);
+    localStorage["grid_data"] = JSON.stringify(localData);
+    $("#grid").data("kendoGrid").dataSource.read();
+
+    $("#dialog").data("kendoWindow").close();
+
+
+}

@@ -29,7 +29,7 @@
                 <form id="book_form">
                     <ul class="fieldlist">
                         <li>
-                            <img class="book-image" src="image/database.jpg" alt="">
+                            <img class="book-image" src="image/database.jpg" alt="" style="height:auto">
                         </li>
                         <li>
                             <label class="required">圖書類別</label>
@@ -43,31 +43,31 @@
                         </li>
                         <li>
                             <label class="required">書名</label>
-                            <input id="book_name" type="text" />
+                            <input id="book_name" type="text" style="width:90%"/>
                         </li>
                         <li>
                             <label class="required">作者</label>
-                            <input id="book_author" type="text" />
+                            <input id="book_author" type="text" style="width:90%"/>
                         </li>
                         <li>
                             <label class="required">購買日期</label>
-                            <input id="bought_datepicker" />
+                            <input id="bought_datepicker" style="width:90%"/>
                         </li>
                         <li>
                             <label>送達日期</label>
-                            <input id="delivered_datepicker" />
+                            <input id="delivered_datepicker" style="width:90%"/>
                         </li>
                         <li>
                             <label class="required">金額</label>
-                            <input id="book_price" type="text" style="text-align:right;" onchange="moneyFormat()" />
+                            <input id="book_price" type="number" min="0" step="1" style="text-align:right;width:90%" onchange="moneyFormat()" />
                         </li>
                         <li>
                             <label class="required">數量</label>
-                            <input id="book_amount" type="text" style="text-align:right;" onkeyup="moneyFormat()" />
+                            <input id="book_amount" type="number" min="0" step="1" style="text-align:right;width:90%" onkeyup="moneyFormat()" />
                         </li>
                         <li>
                             <span>
-                                總計&nbsp;<span id="book_total">0</span> 元
+                                總計&nbsp;<span id="book_total" >0</span> 元
                             </span>
                         </li>
                         <li class="uk-text-right">
