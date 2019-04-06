@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/fontawesome.css">
 
+
     <title>圖書館</title>
 </head>
 
@@ -22,7 +23,8 @@
     </header>
     <main>
         <div class="uk-container align-center">
-            <button type="button" id="add_book" class="k-button k-primary btn-add-book" >新增書籍</button>
+            <button type="button" id="add_book" class="k-button k-primary btn-add-book">新增書籍</button>
+
             <div id="dialog" style="display:none;width:auto" class="uk-card uk-text-left uk-width-1-3">
                 <form id="book_form">
                     <ul class="fieldlist">
@@ -32,11 +34,11 @@
                         <li>
                             <label class="required">圖書類別</label>
                             <select id="book_category">
-                                <option value="database">database</option>
-                                <option value="home">home</option>
-                                <option value="internet">internet</option>
-                                <option value="language">language</option>
-                                <option value="system">system</option>
+                                <option value="database">資料庫</option>
+                                <option value="home">家庭</option>
+                                <option value="internet">網路</option>
+                                <option value="language">語言</option>
+                                <option value="system">系統</option>
                             </select>
                         </li>
                         <li>
@@ -57,11 +59,11 @@
                         </li>
                         <li>
                             <label class="required">金額</label>
-                            <input id="book_price" type="text" />
+                            <input id="book_price" type="text" style="text-align:right;" onchange="moneyFormat()" />
                         </li>
                         <li>
                             <label class="required">數量</label>
-                            <input id="book_amount" type="text" />
+                            <input id="book_amount" type="text" style="text-align:right;" onkeyup="moneyFormat()" />
                         </li>
                         <li>
                             <span>
@@ -69,7 +71,7 @@
                             </span>
                         </li>
                         <li class="uk-text-right">
-                            <button type="button" class="k-button k-primary btn-add-book" id="save_book">新增</button>
+                            <button type="button" class="k-button k-primary btn-add-book" id="save_book" onclick="addbook()">新增</button>
                         </li>
                     </ul>
                 </form>
@@ -77,6 +79,10 @@
 
             <div id="book_grid">
             </div>
+            <br>
+            <button onClick="reset()" class="k-button">Reset test data</button>
+            <br><br>
+            <div id="grid"></div>
         </div>
     </main>
     <footer></footer>
